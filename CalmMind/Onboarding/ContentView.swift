@@ -42,8 +42,6 @@ struct ContentView: View {
                         Image(.onboarding)
                         Spacer()
                     }
-                    
-                    
                     NavigationLink(
                         destination: MainView(),
                         isActive: $isMainViewActive,

@@ -50,7 +50,6 @@ struct MainView: View {
     ]
     
     var body: some View {
-        NavigationView {
             VStack {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
@@ -95,8 +94,7 @@ struct MainView: View {
             .onAppear {
                 selectedButton = items.first
             }
-        }
-    }
+        } 
 }
 
 struct Model: Identifiable, Hashable {
