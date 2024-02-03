@@ -50,7 +50,6 @@ struct ContentView: View {
                         }
                     )
                     HStack {
-                        
                         Spacer()
                         Button(action: {
                             self.isMainViewActive = true
@@ -70,7 +69,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 #Preview {
     ContentView()
