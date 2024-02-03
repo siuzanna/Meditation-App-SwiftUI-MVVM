@@ -25,11 +25,11 @@ struct CategoryCell: View {
                 Text(text)
                     .fontWeight(.medium)
                     .font(.system(size: 20))
+                    .foregroundColor(.black)
                 
                 Spacer()
                 
                 Button(action: {
-//                    action()
                 }) {
                     Text("\(time) min")
                         .foregroundColor(.black)

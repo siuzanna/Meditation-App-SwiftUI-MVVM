@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
-    let items = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
     @State private var selectedButton: String?
+    
+    let items = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
     let itemss = [
         CategoryModel(text: "Zen Meditation",
                       image: .meditation,
@@ -46,15 +47,13 @@ struct MainView: View {
             }
             .frame(height: 80)
             ScrollView(.vertical, showsIndicators: false) {
-                HStack {
-                    VStack {
-                        ForEach(itemss) { item in
-                            NavigationLink(destination: DetailView()) {
-                                CategoryCell(model: item)
-                                    .padding(.leading)
-                                    .padding(.trailing)
-                                    .padding(.bottom)
-                            }
+                VStack {
+                    ForEach(itemss) { item in
+                        NavigationLink(destination: DetailView()) {
+                            CategoryCell(model: item)
+                                .padding(.leading)
+                                .padding(.trailing)
+                                .padding(.bottom)
                         }
                     }
                 }

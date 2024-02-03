@@ -11,7 +11,7 @@ struct DetailView: View {
     @State private var progress: Double = 0.5
     
     var body: some View {
-//        NavigationView {
+        NavigationView {
             VStack(spacing: 0) {
                 CircleView()
                 Text("Zen Meditation")
@@ -78,17 +78,16 @@ struct DetailView: View {
                 Color.yeallowMain
                     .ignoresSafeArea()
             )
-//            .navigationBarTitle("Main Title", displayMode: .inline)
             .navigationBarItems(
                 leading: HStack {
                     Image(.chevronArrowLeft)
                         .font(.title)
-                        .navigationBarBackButtonHidden(true)
                 },
                 trailing:
                     Image(.download)
             )
-//        }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
