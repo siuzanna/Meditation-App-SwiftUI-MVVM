@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "burger.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
