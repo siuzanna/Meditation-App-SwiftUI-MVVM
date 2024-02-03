@@ -12,11 +12,8 @@ import SwiftUI
 //}
 
 struct CircleView: View {
-    
     var body: some View {
         ZStack {
-//            Color.white
-            
             Circle()
                 .frame(width: 230, height: 230)
                 .foregroundColor(.orangeMain)
@@ -38,41 +35,90 @@ struct CircleView: View {
 }
 
 struct DetailView: View {
-    
+    @State private var progress: Double = 0.5
+
     var body: some View {
-        NavigationView {
-            VStack {
-                Color.yeallowMain.ignoresSafeArea()
-                VStack {
-                    Color.white
-  
-                    CircleView()
+//        NavigationView {
+            VStack(spacing: 0) {
+                
+                CircleView()
+                    
+                Text("Zen Meditation")
+                    .fontWeight(.medium)
+                    .font(.system(size: 24))
+                    .padding(.top)
+                Text("Inner Peace")
+                    .fontWeight(.medium)
+                    .font(.system(size: 14))
+                    .foregroundColor(.gray)
+                
+                
+                HStack(alignment: .center) {
+                    Button {
                         
-                    Text("Zen Meditation")
-                        .fontWeight(.medium)
-                        .font(.system(size: 24))
-                        .padding(.top)
-                    Text("Inner Peace")
-                        .fontWeight(.medium)
-                        .font(.system(size: 14))
+                    } label: {
+                        Image(.previews)
+                    }
+                    .padding()
+                    
+                    Button(action: {
+                     }) {
+                        Image(.pause)
+                            .padding()
+                            .background(Color.orangeMain)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(32)
+                    }
+                    .frame(width: 64, height: 64)
+
+                    Button {
+                        
+                    } label: {
+                        Image(.fastForward)
+                    }
+                    .padding()
+
+                }
+                .padding(.top, 34)
+                
+        
+                HStack(alignment: .center) {
+                    Text("13:35")
+                        .fontWeight(.regular)
+                        .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
+                    MusicTimelineProgressView(progress: $progress)
+                        .tint(.yeallowMain)
                     
+                    Text("15:00")
+                        .fontWeight(.regular)
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
                 }
-                .cornerRadius(24)
-                .padding(.top)
-                
-                .navigationBarItems(
-                    leading: HStack {
-                        Image(.chevronArrowLeft)
-                            .font(.title)
-                    },
-                    trailing:
-                        Image(.download)
-                )
+                .padding(.top, 34)
+                .padding(.leading, 30)
+                .padding(.trailing, 30)
+                Spacer()
             }
+            .padding(.top, 48)
+            .background(Color.white)
+            .cornerRadius(24)
+            .background(
+                Color.yeallowMain
+                    .ignoresSafeArea()
+            )
+ 
+            .navigationBarItems(
+                leading: HStack {
+                    Image(.chevronArrowLeft)
+                        .font(.title)
+                },
+                trailing:
+                    Image(.download)
+            )
         }
-    }
+//    }
 }
 
 
@@ -80,19 +126,24 @@ struct DetailView: View {
     DetailView()
 }
 
-struct RoundedTopCorners: Shape {
-    let radius: CGFloat
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-
-        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY + radius))
-        path.addArc(center: CGPoint(x: rect.maxX - radius, y: rect.minY + radius), radius: radius, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
-        path.addLine(to: CGPoint(x: rect.minX + radius, y: rect.minY))
-        path.addArc(center: CGPoint(x: rect.minX + radius, y: rect.minY + radius), radius: radius, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 90), clockwise: false)
-
-        return path
+struct MusicTimelineProgressView: View {
+    @Binding var progress: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .frame(width: geometry.size.width, height: 8)
+                    .opacity(0.3)
+                    .foregroundColor(.gray)
+                    .cornerRadius(8)
+                
+                Rectangle()
+                    .frame(width: CGFloat(progress) * geometry.size.width, height: 8)
+                    .foregroundColor(.yeallowMain)
+            }
+        }
+        .frame(height: 8)
     }
 }
+ 
