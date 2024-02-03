@@ -6,9 +6,28 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct DetailView: View {
     @State private var progress: Double = 0.5
+    @Environment(\.presentationMode) var presentationMode
+    
+    
+    @State private var isPlaying = false
+    @State private var url: URL!
+    @State private var selectedIndex = 0
+    @State private var player: AVPlayer?
+
+    let radioURLs = [
+        "http://mediaserv30.live-streams.nl:8086/live",
+        "http://mediaserv33.live-streams.nl:8034/live",
+        "http://mediaserv38.live-streams.nl:8006/live",
+        "http://mediaserv33.live-streams.nl:8036/live",
+        "http://mediaserv30.live-streams.nl:8000/live",
+        "http://mediaserv30.live-streams.nl:8088/live",
+        "http://mediaserv38.live-streams.nl:8027/live",
+        "http://mediaserv21.live-streams.nl:8000/live"
+    ]
     
     var body: some View {
         NavigationView {
@@ -25,15 +44,31 @@ struct DetailView: View {
                 
                 HStack(alignment: .center) {
                     Button {
-                        
+                        if selectedIndex >= 1 {
+                            player?.pause()
+                            selectedIndex -= 1
+                            url = URL(string: radioURLs[selectedIndex])!
+                            player = AVPlayer(url: url)
+                            player?.play()
+                        }
                     } label: {
                         Image(.previews)
                     }
                     .padding()
                     
                     Button(action: {
+                         isPlaying.toggle()
+                        if  isPlaying {
+                             player?.play()
+                        } else {
+                             player?.pause()
+                        }
+                        
                     }) {
-                        Image(.pause)
+                        Image(isPlaying ? .pause : .play)
+                            .resizable()
+//                            .aspectRatio(contentMode: .center)
+                            .frame(width: 32, height: 32)
                             .padding()
                             .background(Color.orangeMain)
                             .foregroundColor(Color.white)
@@ -42,7 +77,13 @@ struct DetailView: View {
                     .frame(width: 64, height: 64)
                     
                     Button {
-                        
+                        if selectedIndex < radioURLs.count-1 {
+                            player?.pause()
+                            selectedIndex += 1
+                            url = URL(string: radioURLs[selectedIndex])!
+                            player = AVPlayer(url: url)
+                            player?.play()
+                        }
                     } label: {
                         Image(.fastForward)
                     }
@@ -57,8 +98,8 @@ struct DetailView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
-                    MusicTimelineProgressView(progress: $progress)
-                        .tint(.yeallowMain)
+                        MusicTimelineProgressView(progress: $progress)
+                            .tint(.yeallowMain)
                     
                     Text("15:00")
                         .fontWeight(.regular)
@@ -78,10 +119,20 @@ struct DetailView: View {
                 Color.yeallowMain
                     .ignoresSafeArea()
             )
+            .onAppear {
+                        url = URL(string: radioURLs[selectedIndex])!
+                        player = AVPlayer(url: url)
+                        player?.play()
+                    }
             .navigationBarItems(
                 leading: HStack {
-                    Image(.chevronArrowLeft)
-                        .font(.title)
+                    Button {
+                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(.chevronArrowLeft)
+                            .font(.title)
+                        
+                    }
                 },
                 trailing:
                     Image(.download)
