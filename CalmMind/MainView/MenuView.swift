@@ -55,7 +55,7 @@ struct MainView: View {
             .frame(height: 80)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    NavigationLink(destination: DetailView()) {
+                    NavigationLink(destination: DetailView(model: items.first!)) {
                         CategoryCell(model: items.first!)
                     }
                     .padding(.horizontal)
@@ -66,7 +66,7 @@ struct MainView: View {
                         ], spacing: 16) {
                             ForEach(items, id: \.self) { item in
                                 if item.index%2 == 0 && item.index != 0 {
-                                    NavigationLink(destination: DetailView()) {
+                                    NavigationLink(destination: DetailView(model: item)) {
                                         CategoryCell(model: item)
                                     }
                                 }
@@ -78,7 +78,7 @@ struct MainView: View {
                         ], spacing: 16) {
                             ForEach(items, id: \.self) { item in
                                 if item.index%2 != 0 {
-                                    NavigationLink(destination: DetailView()) {
+                                    NavigationLink(destination: DetailView(model: item)) {
                                         CategoryCell(model: item)
                                     }
                                 }

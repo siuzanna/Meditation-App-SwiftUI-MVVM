@@ -8,24 +8,28 @@
 import SwiftUI
 
 struct CircleView: View {
+    
+    var image: ImageResource
+    var backgroundColor: Color
+    
     var body: some View {
         ZStack {
             Circle()
                 .stroke(lineWidth: 10)
                 .frame(width: 230, height: 230)
-                .foregroundColor(.orangeMain)
+                .foregroundColor(backgroundColor)
                 .offset(x: 0, y: 0)
                 .overlay(
                     Circle()
                         .frame(width: 200, height: 200)
-                        .foregroundColor(.orangeMain)
+                        .foregroundColor(backgroundColor)
                 )
             
-            Image(.bdgirl)
+            Image(image)
         }
     }
 }
 
 #Preview {
-    CircleView()
+    CircleView(image: .reflection, backgroundColor: .red)
 }

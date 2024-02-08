@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MusicTimelineProgressView: View {
     @Binding var progress: Double
+    var mainColor: Color
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +22,7 @@ struct MusicTimelineProgressView: View {
                 
                 Rectangle()
                     .frame(width: CGFloat(progress) * geometry.size.width, height: 8)
-                    .foregroundColor(.yeallowMain)
+                    .foregroundColor(mainColor)
             }
         }
         .frame(height: 8)

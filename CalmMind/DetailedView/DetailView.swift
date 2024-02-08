@@ -13,10 +13,12 @@ struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var player: AVPlayer?
-    @State private var progress: Double = 0.5
+    @State private var progress: Double = 0.2
     @State private var isPlaying = false
     @State private var currentURL: URL!
     @State private var selectedIndex = 0
+    
+    var model: CategoryModel
     
     let radioURLs = [
         "http://mediaserv30.live-streams.nl:8086/live",
@@ -34,8 +36,9 @@ struct DetailView: View {
             VStack(spacing: 0) {
                 Spacer()
                 
-                CircleView()
-                Text("Zen Meditation")
+                CircleView(image: model.image, backgroundColor: model.background)
+                
+                Text(model.text)
                     .fontWeight(.medium)
                     .font(.system(size: 24))
                     .padding(.top)
@@ -72,7 +75,7 @@ struct DetailView: View {
                         //                            .aspectRatio(contentMode: .center)
                             .frame(width: 32, height: 32)
                             .padding()
-                            .background(Color.orangeMain)
+                            .background(model.background)
                             .foregroundColor(Color.white)
                             .cornerRadius(32)
                     }
@@ -95,15 +98,15 @@ struct DetailView: View {
                 .padding(.top, 34)
                 
                 HStack(alignment: .center) {
-                    Text("13:35")
+                    Text("00:02")
                         .fontWeight(.regular)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
-                    MusicTimelineProgressView(progress: $progress)
+                    MusicTimelineProgressView(progress: $progress, mainColor: model.background)
                         .tint(.yeallowMain)
                     
-                    Text("15:00")
+                    Text("00:0\(model.time)")
                         .fontWeight(.regular)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
@@ -124,7 +127,7 @@ struct DetailView: View {
             .onAppear {
                 currentURL = URL(string: radioURLs[selectedIndex])!
                 player = AVPlayer(url: currentURL)
-                player?.play()
+//                player?.play()
             }
             .navigationBarItems(
                 leading: HStack {
@@ -145,5 +148,8 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView()
+    DetailView(model: CategoryModel(text: "Reflection",
+                                    image: .reflection,
+                                    background: .blueMain,
+                                    time: 6, index: 1))
 }
