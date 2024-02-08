@@ -16,23 +16,28 @@ struct MainView: View {
         CategoryModel(text: "Zen Meditation",
                       image: .meditation,
                       background: .orangeMain,
-                      time: 20),
+                      time: 20, index: 0),
         CategoryModel(text: "Reflection",
                       image: .reflection,
                       background: .blueMain,
-                      time: 6),
+                      time: 6, index: 1),
         CategoryModel(text: "Visualization",
                       image: .visualization,
                       background: .pinkMain,
-                      time: 13),
-        CategoryModel(text: "Loving\nKindness",
+                      time: 13, index: 2),
+        CategoryModel(text: "Loving Kindness",
                       image: .kindness,
                       background: .yellow,
-                      time: 15),
-        CategoryModel(text: "Focused\nAttention",
+                      time: 15, index: 3),
+        CategoryModel(text: "Focused Attention",
                       image: .focused,
                       background: .purpleMain,
-                      time: 10)
+                      time: 10, index: 4)
+    ]
+    
+    let columns = [
+        GridItem(.fixed(.infinity/2)),
+        GridItem(.fixed(.infinity/2))
     ]
     
     var body: some View {
@@ -50,14 +55,38 @@ struct MainView: View {
             .frame(height: 80)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(items) { item in
-                        NavigationLink(destination: DetailView()) {
-                            CategoryCell(model: item)
-                                .padding(.leading)
-                                .padding(.trailing)
-                                .padding(.bottom)
+                    NavigationLink(destination: DetailView()) {
+                        CategoryCell(model: items.first!)
+                    }
+                    .padding(.horizontal)
+                    
+                    HStack(alignment: .top, spacing: 10) {
+                        LazyVGrid(columns: [
+                            GridItem(.flexible(), spacing: 0),
+                        ], spacing: 16) {
+                            ForEach(items, id: \.self) { item in
+                                if item.index%2 == 0 && item.index != 0 {
+                                    NavigationLink(destination: DetailView()) {
+                                        CategoryCell(model: item)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        LazyVGrid(columns: [
+                            GridItem(.flexible(), spacing: 0),
+                        ], spacing: 16) {
+                            ForEach(items, id: \.self) { item in
+                                if item.index%2 != 0 {
+                                    NavigationLink(destination: DetailView()) {
+                                        CategoryCell(model: item)
+                                    }
+                                }
+                            }
                         }
                     }
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
                 }
             }
         }

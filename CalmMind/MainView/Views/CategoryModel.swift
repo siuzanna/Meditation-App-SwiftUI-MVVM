@@ -13,13 +13,15 @@ struct CategoryModel: Identifiable, Hashable {
     let image: ImageResource
     let background: Color
     let time: Int
+    let index: Int
     
-    init(text: String, image: ImageResource, background: Color, time: Int) {
+    init(text: String, image: ImageResource, background: Color, time: Int, index: Int) {
         self.id = UUID()
         self.text = text
         self.image = image
         self.background = background
         self.time = time
+        self.index = index
     }
     
     static func ==(lhs: CategoryModel, rhs: CategoryModel) -> Bool {

@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				966FB54E2B6E1D95008AB71B /* CalmMindApp.swift */,
-				966FB55C2B6E1DC4008AB71B /* Onboarding */,
+				966FB55C2B6E1DC4008AB71B /* OnboardingView */,
 				966FB55D2B6E4DED008AB71B /* MainView */,
 				966FB5602B6E7547008AB71B /* DetailedView */,
 				966FB5522B6E1D98008AB71B /* Assets.xcassets */,
@@ -83,12 +83,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		966FB55C2B6E1DC4008AB71B /* Onboarding */ = {
+		966FB55C2B6E1DC4008AB71B /* OnboardingView */ = {
 			isa = PBXGroup;
 			children = (
 				966FB5502B6E1D95008AB71B /* OnboardingView.swift */,
 			);
-			path = Onboarding;
+			path = OnboardingView;
 			sourceTree = "<group>";
 		};
 		966FB55D2B6E4DED008AB71B /* MainView */ = {
