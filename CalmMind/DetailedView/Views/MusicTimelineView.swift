@@ -20,8 +20,7 @@ struct MusicTimelineProgressView: View {
                     .cornerRadius(8)
                 
                 Rectangle()
-                    .frame(width: CGFloat(progress) * geometry.size.width,
-                           height: 8)
+                    .frame(width: CGFloat(progress) * geometry.size.width, height: 8)
                     .foregroundColor(.yeallowMain)
             }
         }

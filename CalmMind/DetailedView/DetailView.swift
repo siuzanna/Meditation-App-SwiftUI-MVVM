@@ -7,17 +7,17 @@
 
 import SwiftUI
 import AVKit
+//https://www.hionline.eu/streaming-url/
 
 struct DetailView: View {
-    @State private var progress: Double = 0.5
     @Environment(\.presentationMode) var presentationMode
     
-    
-    @State private var isPlaying = false
-    @State private var url: URL!
-    @State private var selectedIndex = 0
     @State private var player: AVPlayer?
-
+    @State private var progress: Double = 0.5
+    @State private var isPlaying = false
+    @State private var currentURL: URL!
+    @State private var selectedIndex = 0
+    
     let radioURLs = [
         "http://mediaserv30.live-streams.nl:8086/live",
         "http://mediaserv33.live-streams.nl:8034/live",
@@ -32,6 +32,8 @@ struct DetailView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
+                Spacer()
+                
                 CircleView()
                 Text("Zen Meditation")
                     .fontWeight(.medium)
@@ -47,8 +49,8 @@ struct DetailView: View {
                         if selectedIndex >= 1 {
                             player?.pause()
                             selectedIndex -= 1
-                            url = URL(string: radioURLs[selectedIndex])!
-                            player = AVPlayer(url: url)
+                            currentURL = URL(string: radioURLs[selectedIndex])!
+                            player = AVPlayer(url: currentURL)
                             player?.play()
                         }
                     } label: {
@@ -57,17 +59,17 @@ struct DetailView: View {
                     .padding()
                     
                     Button(action: {
-                         isPlaying.toggle()
+                        isPlaying.toggle()
                         if  isPlaying {
-                             player?.play()
+                            player?.play()
                         } else {
-                             player?.pause()
+                            player?.pause()
                         }
                         
                     }) {
                         Image(isPlaying ? .pause : .play)
                             .resizable()
-//                            .aspectRatio(contentMode: .center)
+                        //                            .aspectRatio(contentMode: .center)
                             .frame(width: 32, height: 32)
                             .padding()
                             .background(Color.orangeMain)
@@ -80,8 +82,8 @@ struct DetailView: View {
                         if selectedIndex < radioURLs.count-1 {
                             player?.pause()
                             selectedIndex += 1
-                            url = URL(string: radioURLs[selectedIndex])!
-                            player = AVPlayer(url: url)
+                            currentURL = URL(string: radioURLs[selectedIndex])!
+                            player = AVPlayer(url: currentURL)
                             player?.play()
                         }
                     } label: {
@@ -98,8 +100,8 @@ struct DetailView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
-                        MusicTimelineProgressView(progress: $progress)
-                            .tint(.yeallowMain)
+                    MusicTimelineProgressView(progress: $progress)
+                        .tint(.yeallowMain)
                     
                     Text("15:00")
                         .fontWeight(.regular)
@@ -111,8 +113,8 @@ struct DetailView: View {
                 .padding(.trailing, 30)
                 
                 Spacer()
+                
             }
-            .padding(.top, 48)
             .background(Color.white)
             .cornerRadius(24)
             .background(
@@ -120,10 +122,10 @@ struct DetailView: View {
                     .ignoresSafeArea()
             )
             .onAppear {
-                        url = URL(string: radioURLs[selectedIndex])!
-                        player = AVPlayer(url: url)
-                        player?.play()
-                    }
+                currentURL = URL(string: radioURLs[selectedIndex])!
+                player = AVPlayer(url: currentURL)
+                player?.play()
+            }
             .navigationBarItems(
                 leading: HStack {
                     Button {

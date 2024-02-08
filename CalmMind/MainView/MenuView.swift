@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var selectedButton: String?
     
-    let items = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
-    let itemss = [
+    @State private var selectedButton: String?
+    let catergories = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
+    
+    let items = [
         CategoryModel(text: "Zen Meditation",
                       image: .meditation,
                       background: .orangeMain,
@@ -31,13 +32,14 @@ struct MainView: View {
         CategoryModel(text: "Focused\nAttention",
                       image: .focused,
                       background: .purpleMain,
-                      time: 10)]
+                      time: 10)
+    ]
     
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
-                    ForEach(items, id: \.self) { item in
+                    ForEach(catergories, id: \.self) { item in
                         FiterCell(text: item, isSelected: selectedButton == item) {
                             selectedButton = item
                         }
@@ -48,7 +50,7 @@ struct MainView: View {
             .frame(height: 80)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(itemss) { item in
+                    ForEach(items) { item in
                         NavigationLink(destination: DetailView()) {
                             CategoryCell(model: item)
                                 .padding(.leading)
@@ -75,7 +77,7 @@ struct MainView: View {
         )
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            selectedButton = items.first
+            selectedButton = catergories.first
         }
     }
 }
