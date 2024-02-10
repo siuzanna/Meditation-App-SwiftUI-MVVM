@@ -96,7 +96,7 @@
 			children = (
 				966FB55E2B6E4E01008AB71B /* MenuView.swift */,
 				96A6256C2B77B8500018CC6F /* Model */,
-				966FB56E2B6EA8DC008AB71B /* Views */,
+				966FB56E2B6EA8DC008AB71B /* Cells */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -119,13 +119,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		966FB56E2B6EA8DC008AB71B /* Views */ = {
+		966FB56E2B6EA8DC008AB71B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				966FB5692B6EA7CD008AB71B /* MeditationCell.swift */,
 				966FB56B2B6EA812008AB71B /* FiterCell.swift */,
 			);
-			path = Views;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		96A6256C2B77B8500018CC6F /* Model */ = {
