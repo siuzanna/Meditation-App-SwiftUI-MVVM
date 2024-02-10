@@ -7,7 +7,6 @@
 
 import SwiftUI
 import AVKit
-//https://www.hionline.eu/streaming-url/
 
 struct MeditationDetailView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -151,3 +150,5 @@ struct MeditationDetailView: View {
                                     background: .blueMain,
                                     time: 6, index: 1))
 }
+
+//https://www.hionline.eu/streaming-url/

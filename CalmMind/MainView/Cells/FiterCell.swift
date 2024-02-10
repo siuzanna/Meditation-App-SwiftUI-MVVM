@@ -1,5 +1,5 @@
 //
-//  FiterCell.swift
+//  CategoryCell.swift
 //  CalmMind
 //
 //  Created by Siuzanna Karagulova   on 3/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FiterCell: View {
+struct CategoryCell: View {
     let text: String
     let isSelected: Bool
     let action: () -> Void

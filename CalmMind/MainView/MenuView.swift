@@ -40,7 +40,7 @@ struct MainView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
                     ForEach(catergories, id: \.self) { item in
-                        FiterCell(text: item, isSelected: selectedButton == item) {
+                        CategoryCell(text: item, isSelected: selectedButton == item) {
                             selectedButton = item
                         }
                     }
