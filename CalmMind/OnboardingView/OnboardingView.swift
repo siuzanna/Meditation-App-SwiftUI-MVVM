@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct OnboardingView: View {
     @State private var isMainViewActive = false
     
     var body: some View {
@@ -71,5 +71,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    OnboardingView()
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 //https://www.hionline.eu/streaming-url/
 
-struct DetailView: View {
+struct MeditationDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var player: AVPlayer?
@@ -18,7 +18,7 @@ struct DetailView: View {
     @State private var currentURL: URL!
     @State private var selectedIndex = 0
     
-    var model: CategoryModel
+    var model: MeditationModel
     
     let radioURLs = [
         "http://mediaserv30.live-streams.nl:8086/live",
@@ -72,7 +72,6 @@ struct DetailView: View {
                     }) {
                         Image(isPlaying ? .pause : .play)
                             .resizable()
-                        //                            .aspectRatio(contentMode: .center)
                             .frame(width: 32, height: 32)
                             .padding()
                             .background(model.background)
@@ -127,7 +126,6 @@ struct DetailView: View {
             .onAppear {
                 currentURL = URL(string: radioURLs[selectedIndex])!
                 player = AVPlayer(url: currentURL)
-//                player?.play()
             }
             .navigationBarItems(
                 leading: HStack {
@@ -148,7 +146,7 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(model: CategoryModel(text: "Reflection",
+    MeditationDetailView(model: MeditationModel(text: "Reflection",
                                     image: .reflection,
                                     background: .blueMain,
                                     time: 6, index: 1))

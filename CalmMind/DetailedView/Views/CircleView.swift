@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CircleView: View {
-    
     var image: ImageResource
     var backgroundColor: Color
     

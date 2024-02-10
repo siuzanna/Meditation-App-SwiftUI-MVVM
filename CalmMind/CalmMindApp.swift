@@ -11,7 +11,7 @@ import SwiftUI
 struct CalmMindApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
                 .preferredColorScheme(.light)
         }
     }

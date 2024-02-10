@@ -12,32 +12,27 @@ struct MainView: View {
     @State private var selectedButton: String?
     let catergories = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
     
-    let items = [
-        CategoryModel(text: "Zen Meditation",
-                      image: .meditation,
-                      background: .orangeMain,
-                      time: 20, index: 0),
-        CategoryModel(text: "Reflection",
-                      image: .reflection,
-                      background: .blueMain,
-                      time: 6, index: 1),
-        CategoryModel(text: "Visualization",
-                      image: .visualization,
-                      background: .pinkMain,
-                      time: 13, index: 2),
-        CategoryModel(text: "Loving Kindness",
-                      image: .kindness,
-                      background: .yellow,
-                      time: 15, index: 3),
-        CategoryModel(text: "Focused Attention",
-                      image: .focused,
-                      background: .purpleMain,
-                      time: 10, index: 4)
-    ]
-    
-    let columns = [
-        GridItem(.fixed(.infinity/2)),
-        GridItem(.fixed(.infinity/2))
+    let meditationCollection = [
+        MeditationModel(text: "Zen Meditation",
+                        image: .meditation,
+                        background: .orangeMain,
+                        time: 20, index: 0),
+        MeditationModel(text: "Reflection",
+                        image: .reflection,
+                        background: .blueMain,
+                        time: 6, index: 1),
+        MeditationModel(text: "Visualization",
+                        image: .visualization,
+                        background: .pinkMain,
+                        time: 13, index: 2),
+        MeditationModel(text: "Loving Kindness",
+                        image: .kindness,
+                        background: .yellow,
+                        time: 15, index: 3),
+        MeditationModel(text: "Focused Attention",
+                        image: .focused,
+                        background: .purpleMain,
+                        time: 10, index: 4)
     ]
     
     var body: some View {
@@ -53,10 +48,11 @@ struct MainView: View {
                 .padding()
             }
             .frame(height: 80)
+            
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    NavigationLink(destination: DetailView(model: items.first!)) {
-                        CategoryCell(model: items.first!)
+                    NavigationLink(destination: MeditationDetailView(model: meditationCollection.first!)) {
+                        MeditationCell(model: meditationCollection.first!)
                     }
                     .padding(.horizontal)
                     
@@ -64,10 +60,10 @@ struct MainView: View {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 0),
                         ], spacing: 16) {
-                            ForEach(items, id: \.self) { item in
+                            ForEach(meditationCollection, id: \.self) { item in
                                 if item.index%2 == 0 && item.index != 0 {
-                                    NavigationLink(destination: DetailView(model: item)) {
-                                        CategoryCell(model: item)
+                                    NavigationLink(destination: MeditationDetailView(model: item)) {
+                                        MeditationCell(model: item)
                                     }
                                 }
                             }
@@ -76,10 +72,10 @@ struct MainView: View {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 0),
                         ], spacing: 16) {
-                            ForEach(items, id: \.self) { item in
+                            ForEach(meditationCollection, id: \.self) { item in
                                 if item.index%2 != 0 {
-                                    NavigationLink(destination: DetailView(model: item)) {
-                                        CategoryCell(model: item)
+                                    NavigationLink(destination: MeditationDetailView(model: item)) {
+                                        MeditationCell(model: item)
                                     }
                                 }
                             }
@@ -112,5 +108,7 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    NavigationView {
+        MainView()
+    }
 }

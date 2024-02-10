@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct CategoryModel: Identifiable, Hashable {
+struct MeditationModel: Identifiable, Hashable {
     let id: UUID
     let text: String
     let image: ImageResource
     let background: Color
     let time: Int
-    let index: Int
+    var index: Int
     
     init(text: String, image: ImageResource, background: Color, time: Int, index: Int) {
         self.id = UUID()
@@ -24,7 +24,7 @@ struct CategoryModel: Identifiable, Hashable {
         self.index = index
     }
     
-    static func ==(lhs: CategoryModel, rhs: CategoryModel) -> Bool {
+    static func ==(lhs: MeditationModel, rhs: MeditationModel) -> Bool {
         return lhs.id == rhs.id
     }
     
