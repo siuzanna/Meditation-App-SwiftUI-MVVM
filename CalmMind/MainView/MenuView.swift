@@ -8,40 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
-    
-    @State private var selectedButton: String?
-    let catergories = ["Sleep", "Inner Peace", "Stress", "Anxiety"]
-    
-    let meditationCollection = [
-        MeditationModel(text: "Zen Meditation",
-                        image: .meditation,
-                        background: .orangeMain,
-                        time: 20, index: 0),
-        MeditationModel(text: "Reflection",
-                        image: .reflection,
-                        background: .blueMain,
-                        time: 6, index: 1),
-        MeditationModel(text: "Visualization",
-                        image: .visualization,
-                        background: .pinkMain,
-                        time: 13, index: 2),
-        MeditationModel(text: "Loving Kindness",
-                        image: .kindness,
-                        background: .yellow,
-                        time: 15, index: 3),
-        MeditationModel(text: "Focused Attention",
-                        image: .focused,
-                        background: .purpleMain,
-                        time: 10, index: 4)
-    ]
+    @ObservedObject var viewModel: MenuViewModel
     
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.flexible())], spacing: 16) {
-                    ForEach(catergories, id: \.self) { item in
-                        CategoryCell(text: item, isSelected: selectedButton == item) {
-                            selectedButton = item
+                    ForEach(viewModel.catergories, id: \.self) { item in
+                        CategoryCell(text: item, isSelected: viewModel.selectedButton == item) {
+                            viewModel.selectedButton = item
                         }
                     }
                 }
@@ -51,20 +26,15 @@ struct MainView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    NavigationLink(destination: MeditationDetailView(model: meditationCollection.first!)) {
-                        MeditationCell(model: meditationCollection.first!)
-                    }
-                    .padding(.horizontal)
-                    
+                    openDetailView(viewModel.meditationCollection.first!)
+                        .padding(.horizontal)
                     HStack(alignment: .top, spacing: 10) {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 0),
                         ], spacing: 16) {
-                            ForEach(meditationCollection, id: \.self) { item in
+                            ForEach(viewModel.meditationCollection, id: \.self) { item in
                                 if item.index%2 == 0 && item.index != 0 {
-                                    NavigationLink(destination: MeditationDetailView(model: item)) {
-                                        MeditationCell(model: item)
-                                    }
+                                    openDetailView(item)
                                 }
                             }
                         }
@@ -72,11 +42,9 @@ struct MainView: View {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 0),
                         ], spacing: 16) {
-                            ForEach(meditationCollection, id: \.self) { item in
+                            ForEach(viewModel.meditationCollection, id: \.self) { item in
                                 if item.index%2 != 0 {
-                                    NavigationLink(destination: MeditationDetailView(model: item)) {
-                                        MeditationCell(model: item)
-                                    }
+                                    openDetailView(item)
                                 }
                             }
                         }
@@ -101,14 +69,17 @@ struct MainView: View {
             }
         )
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            selectedButton = catergories.first
+    }
+    
+    func openDetailView(_ model: MeditationModel) -> NavigationLink<MeditationCell, MeditationDetailView> {
+        return NavigationLink(destination: MeditationDetailView(model: model)) {
+            MeditationCell(viewModel: model)
         }
     }
 }
 
 #Preview {
     NavigationView {
-        MainView()
+        MainView(viewModel: MenuViewModel())
     }
 }

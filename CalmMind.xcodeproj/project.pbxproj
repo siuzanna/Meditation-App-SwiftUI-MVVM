@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9645514D2B97B04D0015C4E2 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645514C2B97B04D0015C4E2 /* MenuViewModel.swift */; };
+		964551502B97B4340015C4E2 /* MeditationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645514F2B97B4340015C4E2 /* MeditationDetailViewModel.swift */; };
 		966FB54F2B6E1D95008AB71B /* CalmMindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB54E2B6E1D95008AB71B /* CalmMindApp.swift */; };
 		966FB5512B6E1D95008AB71B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB5502B6E1D95008AB71B /* OnboardingView.swift */; };
 		966FB5532B6E1D98008AB71B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 966FB5522B6E1D98008AB71B /* Assets.xcassets */; };
@@ -16,11 +18,13 @@
 		966FB5642B6EA6CB008AB71B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB5632B6EA6CA008AB71B /* CircleView.swift */; };
 		966FB5662B6EA710008AB71B /* MusicTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB5652B6EA710008AB71B /* MusicTimelineView.swift */; };
 		966FB56A2B6EA7CD008AB71B /* MeditationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB5692B6EA7CD008AB71B /* MeditationCell.swift */; };
-		966FB56C2B6EA812008AB71B /* FiterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB56B2B6EA812008AB71B /* FiterCell.swift */; };
+		966FB56C2B6EA812008AB71B /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB56B2B6EA812008AB71B /* CategoryCell.swift */; };
 		96A6256D2B77B8810018CC6F /* MeditationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966FB5672B6EA791008AB71B /* MeditationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9645514C2B97B04D0015C4E2 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		9645514F2B97B4340015C4E2 /* MeditationDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationDetailViewModel.swift; sourceTree = "<group>"; };
 		966FB54B2B6E1D95008AB71B /* CalmMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalmMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		966FB54E2B6E1D95008AB71B /* CalmMindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalmMindApp.swift; sourceTree = "<group>"; };
 		966FB5502B6E1D95008AB71B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -32,7 +36,7 @@
 		966FB5652B6EA710008AB71B /* MusicTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTimelineView.swift; sourceTree = "<group>"; };
 		966FB5672B6EA791008AB71B /* MeditationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationModel.swift; sourceTree = "<group>"; };
 		966FB5692B6EA7CD008AB71B /* MeditationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationCell.swift; sourceTree = "<group>"; };
-		966FB56B2B6EA812008AB71B /* FiterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiterCell.swift; sourceTree = "<group>"; };
+		966FB56B2B6EA812008AB71B /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		964551512B98F1690015C4E2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				966FB5672B6EA791008AB71B /* MeditationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		966FB5422B6E1D95008AB71B = {
 			isa = PBXGroup;
 			children = (
@@ -94,9 +106,10 @@
 		966FB55D2B6E4DED008AB71B /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				9645514C2B97B04D0015C4E2 /* MenuViewModel.swift */,
 				966FB55E2B6E4E01008AB71B /* MenuView.swift */,
-				96A6256C2B77B8500018CC6F /* Model */,
 				966FB56E2B6EA8DC008AB71B /* Cells */,
+				964551512B98F1690015C4E2 /* Model */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -104,6 +117,7 @@
 		966FB5602B6E7547008AB71B /* DetailedView */ = {
 			isa = PBXGroup;
 			children = (
+				9645514F2B97B4340015C4E2 /* MeditationDetailViewModel.swift */,
 				966FB5612B6E755F008AB71B /* MeditationDetailView.swift */,
 				966FB56D2B6EA8D3008AB71B /* Views */,
 			);
@@ -123,17 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				966FB5692B6EA7CD008AB71B /* MeditationCell.swift */,
-				966FB56B2B6EA812008AB71B /* FiterCell.swift */,
+				966FB56B2B6EA812008AB71B /* CategoryCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		96A6256C2B77B8500018CC6F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				966FB5672B6EA791008AB71B /* MeditationModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,13 +213,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				966FB5622B6E755F008AB71B /* MeditationDetailView.swift in Sources */,
-				966FB56C2B6EA812008AB71B /* FiterCell.swift in Sources */,
+				966FB56C2B6EA812008AB71B /* CategoryCell.swift in Sources */,
 				966FB5642B6EA6CB008AB71B /* CircleView.swift in Sources */,
 				966FB55F2B6E4E01008AB71B /* MenuView.swift in Sources */,
 				966FB56A2B6EA7CD008AB71B /* MeditationCell.swift in Sources */,
+				9645514D2B97B04D0015C4E2 /* MenuViewModel.swift in Sources */,
 				966FB5662B6EA710008AB71B /* MusicTimelineView.swift in Sources */,
 				966FB5512B6E1D95008AB71B /* OnboardingView.swift in Sources */,
 				96A6256D2B77B8810018CC6F /* MeditationModel.swift in Sources */,
+				964551502B97B4340015C4E2 /* MeditationDetailViewModel.swift in Sources */,
 				966FB54F2B6E1D95008AB71B /* CalmMindApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

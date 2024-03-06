@@ -10,37 +10,25 @@ import AVKit
 
 struct MeditationDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: MeditationDetailViewModel
     
-    @State private var player: AVPlayer?
-    @State private var progress: Double = 0.2
-    @State private var isPlaying = false
-    @State private var currentURL: URL!
-    @State private var selectedIndex = 0
-    
-    var model: MeditationModel
-    
-    let radioURLs = [
-        "http://mediaserv30.live-streams.nl:8086/live",
-        "http://mediaserv33.live-streams.nl:8034/live",
-        "http://mediaserv38.live-streams.nl:8006/live",
-        "http://mediaserv33.live-streams.nl:8036/live",
-        "http://mediaserv30.live-streams.nl:8000/live",
-        "http://mediaserv30.live-streams.nl:8088/live",
-        "http://mediaserv38.live-streams.nl:8027/live",
-        "http://mediaserv21.live-streams.nl:8000/live"
-    ]
+    init(model: MeditationModel) {
+        self.viewModel = MeditationDetailViewModel(model: model)
+    }
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 Spacer()
                 
-                CircleView(image: model.image, backgroundColor: model.background)
+                CircleView(image: viewModel.model.image,
+                           backgroundColor: viewModel.model.background)
                 
-                Text(model.text)
+                Text(viewModel.model.text)
                     .fontWeight(.medium)
                     .font(.system(size: 24))
                     .padding(.top)
+                
                 Text("Inner Peace")
                     .fontWeight(.medium)
                     .font(.system(size: 14))
@@ -48,50 +36,31 @@ struct MeditationDetailView: View {
                 
                 HStack(alignment: .center) {
                     Button {
-                        if selectedIndex >= 1 {
-                            player?.pause()
-                            selectedIndex -= 1
-                            currentURL = URL(string: radioURLs[selectedIndex])!
-                            player = AVPlayer(url: currentURL)
-                            player?.play()
-                        }
+                        viewModel.previewsTrackTapped()
                     } label: {
                         Image(.previews)
                     }
                     .padding()
                     
                     Button(action: {
-                        isPlaying.toggle()
-                        if  isPlaying {
-                            player?.play()
-                        } else {
-                            player?.pause()
-                        }
-                        
+                        viewModel.pausePlayTrackTapped()
                     }) {
-                        Image(isPlaying ? .pause : .play)
+                        Image(viewModel.isPlaying ? .pause : .play)
                             .resizable()
                             .frame(width: 32, height: 32)
                             .padding()
-                            .background(model.background)
+                            .background(viewModel.model.background)
                             .foregroundColor(Color.white)
                             .cornerRadius(32)
                     }
                     .frame(width: 64, height: 64)
                     
                     Button {
-                        if selectedIndex < radioURLs.count-1 {
-                            player?.pause()
-                            selectedIndex += 1
-                            currentURL = URL(string: radioURLs[selectedIndex])!
-                            player = AVPlayer(url: currentURL)
-                            player?.play()
-                        }
+                        viewModel.nextTrackTapped()
                     } label: {
                         Image(.fastForward)
                     }
                     .padding()
-                    
                 }
                 .padding(.top, 34)
                 
@@ -101,10 +70,11 @@ struct MeditationDetailView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                     
-                    MusicTimelineProgressView(progress: $progress, mainColor: model.background)
-                        .tint(.yeallowMain)
+                    MusicTimelineProgressView(progress: $viewModel.progress,
+                                              mainColor: viewModel.model.background)
+                    .tint(.yeallowMain)
                     
-                    Text("00:0\(model.time)")
+                    Text("00:0\(viewModel.model.time)")
                         .fontWeight(.regular)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
@@ -122,10 +92,6 @@ struct MeditationDetailView: View {
                 Color.yeallowMain
                     .ignoresSafeArea()
             )
-            .onAppear {
-                currentURL = URL(string: radioURLs[selectedIndex])!
-                player = AVPlayer(url: currentURL)
-            }
             .navigationBarItems(
                 leading: HStack {
                     Button {
@@ -133,7 +99,6 @@ struct MeditationDetailView: View {
                     } label: {
                         Image(.chevronArrowLeft)
                             .font(.title)
-                        
                     }
                 },
                 trailing:
@@ -146,9 +111,9 @@ struct MeditationDetailView: View {
 
 #Preview {
     MeditationDetailView(model: MeditationModel(text: "Reflection",
-                                    image: .reflection,
-                                    background: .blueMain,
-                                    time: 6, index: 1))
+                                                image: .reflection,
+                                                background: .blueMain,
+                                                time: 6, index: 1))
 }
 
 //https://www.hionline.eu/streaming-url/

@@ -43,7 +43,7 @@ struct OnboardingView: View {
                         Spacer()
                     }
                     NavigationLink(
-                        destination: MainView(),
+                        destination: MainView(viewModel: MenuViewModel()),
                         isActive: $isMainViewActive,
                         label: {
                             EmptyView()

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MusicTimelineProgressView: View {
-
     @Binding var progress: Double
     var mainColor: Color
     
